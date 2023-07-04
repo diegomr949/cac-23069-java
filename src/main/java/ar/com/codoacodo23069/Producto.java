@@ -7,19 +7,26 @@ import java.time.LocalDate;//api de fecha de java
 public class Producto {
     
     //atributos
-    private String imagen; // - 
-    private double precio;
-    private String titulo;
-    private String autor;
     private long id;
+    private String titulo;
+    private double precio;
+    private String imagen; // - 
     private LocalDate fecha;
     private String codigo;
+    private String autor;
+
 
     //constructor/es
-    public Producto(String titulo, String autor, double precio, String imagen, int id,String codigo) {
+    /*public Producto(String titulo, String autor, double precio, String imagen, int id,String codigo) {
         //nace con estos valores
         this.id = id;
 
+        init(titulo, autor, precio, imagen, codigo);
+    }*/
+
+    public Producto(long id, String titulo, double precio, String imagen, LocalDate fecha, String codigo,
+            String autor) {
+        this.id = id;
         init(titulo, autor, precio, imagen, codigo);
     }
 
