@@ -1,20 +1,21 @@
+<%@ page import="ar.com.codoacodo23069.Producto" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <jsp:include page="styles.jsp"></jsp:include>
-
 </head>
 <body>
     <jsp:include page="navbar.jsp"></jsp:include>
+      <% 
+      Producto producto = (Producto)request.getAttribute("producto");
+     %>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <section>
-                    <h1>Alta Articulo</h1>
-                    <!--<%=request.getContextPath()%> se convierte en el contexto
-                    /web-app
-                    -->
-                    <form method="post" action="<%=request.getContextPath()%>/AltaProductoController">
+                    <h1>Editar Producto id=<%=producto.getId()%></h1>
+                    <form method="post" action="<%=request.getContextPath()%>/EditarProductoController?id=<%=producto.getId()%>">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" 
                                 class="form-label">Nombre</label>
@@ -23,7 +24,8 @@
                                 class="form-control" 
                                 id="exampleFormControlInput1"
                                 placeholder="Nombre"
-                                maxlength="50">
+                                maxlength="50"
+                                value="<%=producto.getTitulo()%>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
@@ -32,7 +34,8 @@
                             <input name="precio" 
                                 type="number" 
                                 class="form-control" 
-                                id="exampleFormControlTextarea1">
+                                id="exampleFormControlTextarea1"
+                                value="<%=producto.getPrecio()%>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
@@ -41,7 +44,8 @@
                             <input name="imagen" 
                                 type="file" 
                                 class="form-control" 
-                                id="exampleFormControlTextarea1">
+                                id="exampleFormControlTextarea1"
+                                value="<%=producto.getImagen()%>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
@@ -49,9 +53,12 @@
                             </label>
                             <input name="codigo" 
                                 type="text" 
+                                disabled
+                                readonly
                                 class="form-control" 
                                 id="exampleFormControlTextarea1" 
-                                maxlength="7">
+                                maxlength="7"
+                                value="<%=producto.getCodigo()%>">
                         </div>
                         <div class="mb-3">
                             <label for="autor" 
@@ -61,16 +68,15 @@
                                 type="text" 
                                 class="form-control" 
                                 id="autor" 
-                                maxlength="50">
+                                maxlength="50"
+                                value="<%=producto.getCodigo()%>">
                         </div>
                         <button class="btn btn-primary">
-                            Dar de alta
-                        </button>
+                            Modificar
                     </form>
                 </section>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 
 </html>

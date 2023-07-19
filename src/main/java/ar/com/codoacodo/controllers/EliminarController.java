@@ -24,13 +24,13 @@ public class EliminarController extends HttpServlet{
             dao.delete(Long.parseLong(id));
 
             //redirect al /ListadoController
-            req.setAttribute("aliminadook", "Se ha eliminado el producto id:" + id);
+            req.setAttribute("eliminadook", "Se ha eliminado el producto id:" + id);
 
             getServletContext().getRequestDispatcher("/ListadoProductosController").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
             
-            req.setAttribute("aliminadofail", "Error eliminado el producto id:" + id);
+            req.setAttribute("eliminadofail", "Error eliminado el producto id:" + id);
 
             getServletContext().getRequestDispatcher("/ListadoProductosController").forward(req, resp);
         }

@@ -4,18 +4,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CaC - 23069</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <jsp:include page="styles.jsp"></jsp:include>
 </head>
 <body>
     <jsp:include page="navbar.jsp"></jsp:include>
     <div class="container">
       <div class="row">
         <div class="col-12">
-            <% String ok = (String)request.getAttribute("aliminadook");%>
-            <% String fail = (String)request.getAttribute("aliminadofail");%>
+            <% String ok = (String)request.getAttribute("eliminadook");%>
+            <% String fail = (String)request.getAttribute("eliminadofail");%>
 
             <%
             if(ok != null) {
@@ -39,11 +36,11 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">TÍTULO</th>
+                    <th scope="col">T&Iacute;TULO</th>
                     <th scope="col">PRECIO</th>
-                    <th scope="col">CÓDIGO</th>
+                    <th scope="col">C&Oacute;DIGO</th>
                     <th scope="col">AUTOR</th>
-                    <th scope="col">IMÁGEN</th>
+                    <th scope="col">FECHA</th>
                     <th scope="col">------</th>
                   </tr>
                 </thead>
@@ -61,12 +58,22 @@
                             <td><%=unarticulo.getAutor()%></td>
                             <td><%=unarticulo.getFecha()%></td>
                             <td>
+                                
                                 <a href="<%=request.getContextPath()%>/EliminarController?id=<%=unarticulo.getId()%>" 
                                     class="btn btn-danger" 
                                     tabindex="-1"
                                     role="button"
                                     aria-disabled="true">
                                     Eliminar
+                                    
+                                </a>
+                                <a href="<%=request.getContextPath()%>/EditarProductoController?id=<%=unarticulo.getId()%>" 
+                                    class="btn btn-danger" 
+                                    tabindex="-1"
+                                    role="button"
+                                    aria-disabled="true">
+                                    Editar
+                                    
                                 </a>
                             </td>
                         </tr>
@@ -76,5 +83,6 @@
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

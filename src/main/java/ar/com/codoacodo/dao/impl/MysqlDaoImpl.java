@@ -5,7 +5,9 @@ import java.sql.Date;
 //que agregamos al pom.xml
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
@@ -24,7 +26,7 @@ public class MysqlDaoImpl implements DAO{
         Connection connection = AdministradorDeConexiones.getConnection();//f5
         
         //ahora si armo el sql para hacer un INSERT                                      1  2  3  4  5
-        String sql = "INSERT INTO productos (titulo, fecha, autor,codigo,imagen) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO productos (titulo, fecha, autor,codigo,imagen, precio) VALUES (?, ?, ?, ?, ? , ?)";
         PreparedStatement pst = connection.prepareStatement(sql);
 
         //ahora seteo los valores 
@@ -33,16 +35,43 @@ public class MysqlDaoImpl implements DAO{
         pst.setString(3, producto.getAutor());
         pst.setString(4, producto.getCodigo());
         pst.setString(5, producto.getImagen());
+        pst.setDouble(6, producto.getPrecio());
 
         pst.executeUpdate();
         //ResultSet
     }
+    
 
     @Override
-    public Producto getById(Long id) throws Exception{
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+    public Producto getById(Long id) throws Exception {//1
+        String sql = "select * from productos where id =?";
+
+        //Obtener la Conection
+        Connection con = AdministradorDeConexiones.getConnection();
+
+        //PreparedStatement con mi sql
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setLong(1,id);
+
+        Producto producto = null;
+
+        ResultSet res = pst.executeQuery();
+
+        if(res.next()) {
+            
+            String titulo = res.getString(2);
+            double precio = res.getDouble(3);
+            String img = res.getString(4);
+            Date fecha = res.getDate(5);
+            String codigo = res.getString(6);
+            String autor = res.getString(7);
+
+            producto = new Producto (id, titulo, precio, img, fecha.toLocalDate(), codigo, autor);
+         }
+        return producto;
     }
+
 
     @Override
     public void delete(Long id) throws Exception{
@@ -91,8 +120,31 @@ public class MysqlDaoImpl implements DAO{
     }
 
     @Override
-    public void update(Producto articulo) throws Exception{
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update(Producto producto) throws Exception{
+        Connection connection = AdministradorDeConexiones.getConnection();//f5
+        
+        //ahora si armo el sql update                     
+        String sql = "update productos set titulo=?, precio=?, imagen=?, autor=? where id=?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+
+        pst.setString(1, producto.getTitulo());
+        pst.setDouble(2, producto.getPrecio());
+        pst.setString(3, producto.getImagen());
+        pst.setString(4,producto.getAutor());
+        pst.setLong(5, producto.getId());
+
+        pst.executeUpdate();
+   
     }
+
+    
+
+       
+
+
+   
+
+   
+    
+    
 }

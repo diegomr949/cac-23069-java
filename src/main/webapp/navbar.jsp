@@ -11,11 +11,23 @@
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/ListadoProductosController">Listado</a>
-          </li>              
+          </li>     
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/EditarProductoController">Editar</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="https://diegomr949.github.io/conf-bsas-2023/">Integrador FrontEnd</a>
+          </li>     
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="https://diegomr949.github.io/Conf-bsas-js2023/">Integrador JavaScript</a>
+          </li>      
         </ul>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> 
+        
+          <button class="btn btn-outline-success" aria-current="page" href="<%=request.getContextPath()%>/BuscadorController">Buscar</a>
+
         </form>
       </div>
     </div>
